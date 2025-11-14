@@ -1,13 +1,5 @@
 import React from 'react';
 
-type Variant = 'primary' | 'danger' | 'success' | 'neutral';
-type Size = 'sm' | 'md';
-
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: Variant;
-  size?: Size;
-  block?: boolean;
-};
 
 const map: Record<Variant, React.CSSProperties> = {
   primary: { background: '#58A9E0', boxShadow: '0 3px 0 #377fb2' },
