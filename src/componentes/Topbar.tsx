@@ -18,7 +18,7 @@ export default function Topbar() {
             strokeLinecap="round"
           />
         </svg>
-        <input placeholder="Buscar brinquedos, livros, roupas..." />
+        <input placeholder="Buscar brinquedos, roupas..." />
       </div>
     </header>
   );

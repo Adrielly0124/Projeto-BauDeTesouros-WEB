@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import "../styles/cadastro.css";
-//npm install firebase
-import { createUserWithEmailAndPassword } from "firebase/auth";  // ✔ CORRETO
-import { auth } from "../config/firebase";   
-import logo from "../assets/logo.png";                // ✔ CORRETO
+
+import { registrarUsuario } from "../services/authService";
+import logo from "../assets/logo.png";
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -31,6 +30,7 @@ export default function Cadastro() {
     if (!form.tipo) return setErro("Selecione o tipo de usuário.");
     if (!form.nome.trim()) return setErro("Digite o nome.");
     if (!form.email.includes("@")) return setErro("E-mail inválido.");
+    if (!form.cpf.trim()) return setErro("Digite o CPF/CNPJ.");
     if (form.senha.length < 6) return setErro("Senha mínima de 6 caracteres.");
     if (form.senha !== form.repetirSenha) return setErro("As senhas não coincidem.");
 
@@ -38,14 +38,15 @@ export default function Cadastro() {
     setLoading(true);
 
     try {
- 
-      const cred = await createUserWithEmailAndPassword(auth, form.email, form.senha);
-      const uid = cred.user.uid;
-
-     
+      await registrarUsuario({
+        tipo: form.tipo,
+        nome: form.nome,
+        email: form.email,
+        cpf: form.cpf,
+        senha: form.senha
+      });
 
       navigate("/login");
-
     } catch (error: any) {
       console.error(error);
 
@@ -105,9 +106,9 @@ export default function Cadastro() {
             onChange={handleChange}
           />
 
-          <button type="submit" className="cadastro-btn" disabled={loading}>
+          <a href="/Login"><button type="submit" className="cadastro-btn" disabled={loading}>
             {loading ? "Cadastrando..." : "CADASTRAR"}
-          </button>
+          </button></a>
         </form>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const items = [
-  { icon:'🏠', label:'INICIO',  path:'/' },
+  { icon:'🏠', label:'INICIO',  path:'/Home' },
   { icon:'🛒', label:'VENDA',   path:'/venda' },
   { icon:'❤️', label:'DOACAO',  path:'/doacao' },
   { icon:'🔄', label:'TROCA',   path:'/troca' },
